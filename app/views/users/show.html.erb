@@ -22,3 +22,30 @@
 		
 	</div>
 </div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel heading"> Friends (<%= @user.active_friends.size %>)</div>
+				<div class="panel panel-body">
+					<% @user.active_friends.last(16).each do |u|%>
+						<%= link_to user_path(u.username) do %>
+							<%= gravatar_tag u.email, size: 40 %> 
+						<%end%>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			
+		</div>
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel heading"> Recent Activities </div>
+				<div class="panel panel-body">
+					<%= render_activities(@activities)%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

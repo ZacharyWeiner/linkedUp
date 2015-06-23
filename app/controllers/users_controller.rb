@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 before_action :authenticate_user!, only: [:index]
   before_action :set_user
   def show
+  	@activities = PublicActivity::Activity.where(owner_id: @user.id) + PublicActivity::Activity.where(recipient_id: @user.id) 
+
   end
 
   def index 

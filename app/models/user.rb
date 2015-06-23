@@ -32,15 +32,19 @@ class User < ActiveRecord::Base
       friendships = Friendship.where(user_id: [self.id, user_2.id], friend_id: [self.id, user_2.id])
       unless friendships.any?
         return "not_friends"
-      else 
-        #if the 'user' in the friendship is us, then that means the status is pending 
-        #if the 'friend' in the relationship is us that that means the status is requested 
-        if friendships.first.user == self 
-          return "pending"
-        else
-          return "requested"
+      else
+        if friendships.first[:state] == 'active'
+          return "friends"
+        else 
+          #if the 'user' in the friendship is us, then that means the status is pending 
+          #if the 'friend' in the relationship is us that that means the status is requested 
+          if friendships.first.user == self 
+            return "pending"
+          else
+            return "requested"
+          end 
         end 
-      end 
+      end
     end
 
     def friendship_relation(user_2)
