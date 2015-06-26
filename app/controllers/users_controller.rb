@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 before_action :authenticate_user!, only: [:index]
   before_action :set_user
   def show
+    @post = Post.new
+    @posts = @user.posts.order("created_at desc")
   	@activities = PublicActivity::Activity.where(owner_id: @user.id) + PublicActivity::Activity.where(recipient_id: @user.id) 
 
   end
