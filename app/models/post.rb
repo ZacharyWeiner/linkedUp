@@ -13,4 +13,7 @@ class Post < ActiveRecord::Base
     simple_format
   end
 
+  def body_html
+    auto_html(self[:content]) { simple_format; link(:target => 'blank') }
+  end
 end

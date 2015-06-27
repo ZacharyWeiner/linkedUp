@@ -12,4 +12,7 @@ class ActivitiesController < ApplicationController
 		end 
 	end
 
+  	def body_html
+  		auto_html(self[:body_html]) { simple_format; link(:target => 'blank') }
+  	end
 end 
