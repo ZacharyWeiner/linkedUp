@@ -12,7 +12,12 @@ class ActivitiesController < ApplicationController
 		end 
 	end
 
-  	def body_html
-  		auto_html(self[:body_html]) { simple_format; link(:target => 'blank') }
-  	end
+  	 def body_html
+    auto_html(self[:content]) { 
+    	html_escape;
+    	image;
+    	youtube(:width => "100%", :height => 250, :autoplay => false);
+    	link( :target => "_blank", :rel => "nofollow");
+    	simple_format; }
+  end
 end 
