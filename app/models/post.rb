@@ -14,6 +14,10 @@ class Post < ActiveRecord::Base
   end
 
   def body_html
-    auto_html(self[:content]) { simple_format; link(:target => 'blank') }
+    auto_html(self[:content]) { html_escape;
+    image;
+    youtube(:width => "100%", :height => 250, :autoplay => false);
+    link( :target => "_blank", :rel => "nofollow");
+    simple_format; }
   end
 end
